@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Deadpool Main Page</title>
+  <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background-image: url('31581.jpg');
+      background-size: cover;
+      background-position: center;
+      color: white;
+    }
+    .overlay {
+      background: rgba(0, 0, 0, 0.6);
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .content {
+      text-align: center;
+      max-width: 600px;
+    }
+    h1 {
+      font-size: 48px;
+      color: #ff1c1c;
+    }
+    p {
+      font-size: 20px;
+      margin-bottom: 30px;
+    }
+    button {
+      margin: 10px;
+      padding: 15px 30px;
+      font-size: 18px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+    .login-btn {
+      background-color: #ff1c1c;
+      color: white;
+    }
+    .register-btn {
+      background-color: black;
+      color: white;
+    }
+    .joke-btn {
+      background-color: white;
+      color: black;
+    }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script type="text/babel">
+    function App() {
+      const [joke, setJoke] = React.useState("");
+
+      const jokes = [
+        "With great power comes great irresponsibility.",
+        "Maximum effort!",
+        "I'm touching myself tonight.",
+        "Fourth wall? Never heard of her.",
+        "Chimichangas solve everything!"
+      ];
+
+      const showJoke = () => {
+        const random = jokes[Math.floor(Math.random() * jokes.length)];
+        setJoke(random);
+      };
+
+      const goToLogin = () => {
+        window.location.href = "authentication.html";
+      };
+
+      const goToRegister = () => {
+        window.location.href = "register.html";
+      };
+
+      return (
+        <div className="overlay">
+          <div className="content">
+            <h1>Welcome to Deadpool’s Lair</h1>
+            <p>Only the worthy may proceed... or those with snacks.</p>
+            <div>
+              <button className="login-btn" onClick={goToLogin}>Увійти</button>
+              <button className="register-btn" onClick={goToRegister}>Реєстрація</button>
+              <button className="joke-btn" onClick={showJoke}>Сарказм дня</button>
+            </div>
+            {joke && <p style={{ marginTop: "20px", fontStyle: "italic" }}>{joke}</p>}
+          </div>
+        </div>
+      );
+    }
+
+    const root = ReactDOM.createRoot(document.getElementById('root'));
+    root.render(<App />);
+  </script>
+</body>
+</html>

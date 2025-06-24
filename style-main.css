@@ -1,0 +1,301 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+
+body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background-image: url('51730.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      color: white;
+      position: relative;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      z-index: 0;
+    }
+
+    .overlay {
+      position: relative;
+      z-index: 1;
+      min-height: 100vh;
+      padding: 40px;
+    }
+
+    h1 {
+      text-align: center;
+      color: #ff1c1c;
+      margin-bottom: 30px;
+      font-weight: 700;
+      font-size: 32px;
+      text-shadow: 1px 1px 4px black;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background-color: rgba(0, 0, 0, 0.6);
+      border-radius: 12px;
+      overflow: hidden;
+      margin-bottom: 30px;
+    }
+
+    th, td {
+      padding: 12px;
+      border: 1px solid #ff1c1c;
+      text-align: center;
+      font-size: 16px;
+      color: white;
+    }
+
+    th {
+      background-color: #ff1c1c;
+      color: white;
+      font-weight: bold;
+      text-shadow: 1px 1px 2px black;
+    }
+
+    td a {
+      color: #ff5959;
+      text-decoration: none;
+    }
+
+    td a:hover {
+      text-decoration: underline;
+      color: white;
+    }
+
+    .burger-menu {
+      font-size: 26px;
+      cursor: pointer;
+      padding: 10px 20px;
+      color: white;
+      background: transparent;
+      border: 2px solid #ff1c1c;
+      border-radius: 8px;
+      transition: background 0.3s;
+    }
+
+    .burger-menu:hover {
+      background: #ff1c1c;
+    }
+
+    .add-moment-btn {
+      background: #ff1c1c;
+      color: white;
+      border: none;
+      padding: 15px 30px;
+      font-size: 18px;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-bottom: 20px;
+      transition: background 0.3s;
+    }
+
+    .add-moment-btn:hover {
+      background: #cc1515;
+    }
+
+    .rating {
+      cursor: pointer;
+      font-size: 22px;
+      color: #777;
+      transition: color 0.2s;
+    }
+
+    .star {
+      display: inline-block;
+      color: #777;
+    }
+
+    .star.hover,
+    .star.selected {
+      color: #ffcc00;
+    }
+
+    .sidebar-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0,0,0,0.5);
+      z-index: 999;
+      display: flex;
+      justify-content: flex-end;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .sidebar {
+      background: white;
+      width: 250px;
+      height: 100%;
+      padding: 20px;
+      box-shadow: -2px 0 10px rgba(0,0,0,0.5);
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      transform: translateX(100%);
+      animation: slideIn 0.3s forwards ease;
+    }
+
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0,0,0,0.7);
+      z-index: 1000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .modal {
+      background: #333;
+      padding: 30px;
+      border-radius: 12px;
+      width: 500px;
+      max-width: 90%;
+      color: white;
+      border: 2px solid #ff1c1c;
+    }
+
+    .modal h2 {
+      color: #ff1c1c;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 5px;
+      color: #ff1c1c;
+      font-weight: bold;
+    }
+
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ff1c1c;
+      border-radius: 5px;
+      background: #222;
+      color: white;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .form-group textarea {
+      resize: vertical;
+      min-height: 80px;
+    }
+
+    .form-buttons {
+      display: flex;
+      gap: 15px;
+      justify-content: center;
+      margin-top: 20px;
+    }
+
+    .form-buttons button {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: background 0.3s;
+    }
+
+    .submit-btn {
+      background: #ff1c1c;
+      color: white;
+    }
+
+    .submit-btn:hover {
+      background: #cc1515;
+    }
+
+    .cancel-btn {
+      background: #666;
+      color: white;
+    }
+
+    .cancel-btn:hover {
+      background: #555;
+    }
+
+    .loading {
+      text-align: center;
+      color: #ff1c1c;
+      font-size: 18px;
+      margin: 20px 0;
+    }
+
+    .success-message {
+      background: rgba(34, 197, 94, 0.2);
+      border: 1px solid #22c55e;
+      color: #22c55e;
+      padding: 10px;
+      border-radius: 5px;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .error-message {
+      background: rgba(239, 68, 68, 0.2);
+      border: 1px solid #ef4444;
+      color: #ef4444;
+      padding: 10px;
+      border-radius: 5px;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    @keyframes slideIn {
+      from { transform: translateX(100%); }
+      to { transform: translateX(0%); }
+    }
+
+    @keyframes fadeIn {
+      from { background: rgba(0, 0, 0, 0); }
+      to { background: rgba(0, 0, 0, 0.5); }
+    }
+
+    .close-btn {
+      background: none;
+      border: none;
+      font-size: 24px;
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      cursor: pointer;
+    }
+
+    .logout-menu-btn, .lang-btn {
+      padding: 10px;
+      background: #ff1c1c;
+      border: none;
+      color: white;
+      font-size: 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+
+    .logout-menu-btn:hover, .lang-btn:hover {
+      background-color: black;
+      color: #ff1c1c;
+    }

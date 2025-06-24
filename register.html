@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Реєстрація</title>
+    <link rel="stylesheet" href="style.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+<body>
+<div class="wrapper">
+   <form id="register-form">
+    <h1>Register</h1>
+     <div class="input-box">
+         <input type="text" id="username" placeholder="Username" required>
+         <i class='bx bx-user'></i>
+     </div>
+     <div class="input-box">
+         <input type="email" id="email" placeholder="Email" required>
+         <i class='bx bx-envelope'></i>
+     </div>
+      <div class="input-box">
+         <input type="password" id="password" placeholder="Password" required>
+         <i class='bx bx-lock'></i>
+     </div>
+       <div class="remember">
+           <label><input type="checkbox"> I agree to the terms & conditions</label>
+       </div>
+       <button type="submit" class="btn">Register</button>
+       <div class="register-link">
+           <p>Already have an account? <a href="authentication.html">Login</a></p>
+       </div>
+   </form>
+</div>
+
+<script>
+document.getElementById('register-form').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const username = document.getElementById('username').value;
+    const email    = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+
+    try {
+        const response = await fetch('https://ce1df932-8319-4256-8109-c0a827ec4d34.mock.pstmn.io/register', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ username, email, password })
+
+        });
+    console.log(response)
+        if (response.ok) {
+            const data = await response.json();
+            alert('ok ' + data.message);
+            window.location.href = 'pr2.html';
+        } else {
+            const data = await response.json();
+            alert('Register Error' + data.message);
+        }
+    } catch (error) {
+        console.error(error);
+        alert('Rrror');
+    }
+});
+</script>
+</body>
+</html>

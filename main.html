@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <title>Deadpool Moments Dashboard</title>
+  <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet" />
+   <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      background-color: white;
+      color: black;
+      font-family: 'Poppins', sans-serif;
+      padding: 20px;
+    }
+    .rating span {
+      cursor: pointer;
+      font-size: 20px;
+      color: #ccc;
+      user-select: none;
+      pointer-events: auto;
+    }
+    .rating .selected, .rating .hover {
+      color: gold;
+    }
+    table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+    th, td {
+      border: 1px solid #ccc;
+      padding: 8px;
+      text-align: left;
+    }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script type="text/babel">
+    function StarRating() {
+      const [rating, setRating] = React.useState(0);
+      const [hovered, setHovered] = React.useState(0);
+
+      return (
+        <div className="rating">
+          {[1, 2, 3, 4, 5].map(star => (
+            <span
+              key={star}
+              className={`${hovered >= star ? 'hover' : ''} ${rating >= star ? 'selected' : ''}`}
+              onMouseEnter={() => setHovered(star)}
+              onMouseLeave={() => setHovered(0)}
+              onClick={() => setRating(star)}
+            >★</span>
+          ))}
+        </div>
+      );
+    }
+
+    function Dashboard() {
+      const [moments, setMoments] = React.useState([]);
+      const [loading, setLoading] = React.useState(true);
+      const [error, setError] = React.useState(null);
+
+      React.useEffect(() => {
+        fetch('https://ce1df932-8319-4256-8109-c0a827ec4d34.mock.pstmn.io/avanger')
+          .then(res => {
+            if (!res.ok) throw new Error('Помилка завантаження');
+            return res.json();
+          })
+          .then(data => {
+            console.log("DEBUG: отримано дані", data);
+            setMoments(data);
+            setLoading(false);
+          })
+          .catch(err => {
+            console.error("DEBUG: помилка fetch", err);
+            setError(err.message);
+            setLoading(false);
+          });
+      }, []);
+
+      if (loading) return <div>Завантаження моментів...</div>;
+      if (error) return <div style={{color: 'red'}}>Помилка: {error}</div>;
+      if (!moments.length) return <div>Моменти не знайдені.</div>;
+
+      return (
+        <div>
+          <h1>Моменти з фільму Дедпул</h1>
+          <table>
+            <thead>
+              <tr>
+                <th>№</th>
+                <th>Сцена</th>
+                <th>Опис</th>
+                <th>Цитата</th>
+                <th>Оцінка</th>
+              </tr>
+            </thead>
+            <tbody>
+              {moments.map((item, idx) => (
+                <tr key={item.id}>
+                  <td>{idx + 1}</td>
+                  <td>{item.scene}</td>
+                  <td>
+                    {item.link
+                      ? <a href={item.link} target="_blank" rel="noopener noreferrer">{item.description}</a>
+                      : item.description}
+                  </td>
+                  <td><i>"{item.quote}"</i></td>
+                  <td><StarRating /></td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      );
+    }
+
+    const root = ReactDOM.createRoot(document.getElementById('root'));
+    root.render(<Dashboard />);
+  </script>
+</body>
+</html>
